@@ -1,4 +1,4 @@
-# Jink
+# Jink for VS Code
 
 > Jink language support for Visual Studio Code
 

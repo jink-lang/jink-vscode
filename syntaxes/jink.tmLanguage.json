@@ -17,15 +17,38 @@
 			}]
 		},
 		"strings": {
+			"patterns": [
+				{
+					"include": "#string-double"
+				},
+				{
+					"include": "#string-single"
+				}
+			]
+		},
+		"string-double": {
 			"name": "string.quoted.double.jink",
 			"begin": "\"",
 			"end": "\"",
 			"patterns": [
 				{
-					"name": "constant.character.escape.jink",
-					"match": "\\\\."
+					"include": "#string-escape-character"
 				}
 			]
+		},
+		"string-single": {
+			"name": "string.quoted.single.jink",
+			"begin": "'",
+			"end": "'",
+			"patterns": [
+				{
+					"include": "#string-escape-character"
+				}
+			]
+		},
+		"string-escape-character": {
+			"name": "constant.character.escape.jink",
+			"match": "\\\\."
 		}
 	},
 	"scopeName": "text.jink"
