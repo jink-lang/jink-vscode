@@ -1,6 +1,8 @@
 # Jink
 
-Jink Language Support
+> Jink language support for Visual Studio Code
+
+[![Discord](https://img.shields.io/discord/365599795886161941.svg)](https://discord.gg/cWzcQz2)
 
 ## Features
 
