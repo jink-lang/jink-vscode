@@ -1,0 +1,39 @@
+{
+    "name": "jink",
+    "displayName": "Jink",
+    "description": "Jink Language Support",
+    "version": "0.0.1",
+    "publisher": "jink-lang",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jink-lang/jink-vscode"
+    },
+    "engines": {
+        "vscode": "^1.22.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "jink",
+                "aliases": [
+                    "Jink",
+                    "jink"
+                ],
+                "extensions": [
+                    ".jk"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "jink",
+                "scopeName": "text.jink",
+                "path": "./syntaxes/jink.tmLanguage.json"
+            }
+        ]
+    }
+}
