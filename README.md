@@ -21,6 +21,6 @@ Check [CHANGELOG.md](https://github.com/jink-lang/jink-vscode/blob/master/CHANGE
 
 This project is distributed under the MIT License - see the [license file](LICENSE) for details.
 
-Copyright © 2018 Jacob Buzalski
+Copyright © 2018+ Jacob Buzalski
 
 **Enjoy!**
