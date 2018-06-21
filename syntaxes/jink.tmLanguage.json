@@ -48,7 +48,8 @@
 		},
 		"string-escape-character": {
 			"name": "constant.character.escape.jink",
-			"match": "\\\\."
+			"match": "\\\\.",
+			"patterns": []
 		}
 	},
 	"scopeName": "text.jink"
