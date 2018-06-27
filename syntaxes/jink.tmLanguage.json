@@ -7,14 +7,27 @@
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"name": "constant.numeric",
+			"match": "[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
 		}
 	],
 	"repository": {
 		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.jink",
-				"match": "\\b(if|else|elseif|import|export|void|return|delete|true|false|null|int|float|string|bool)\\b"
-			}]
+			"patterns": [
+				{
+					"name": "keyword.control.jink",
+					"match": "\\b(if|else|elseif|import|export|void|return|delete|true|false|null|int|float|string|bool)\\b"
+				},
+				{
+					"name": "keyword.operator",
+					"match": "\\+|\\?|\\||\\^|-|&|<|>|=|:"
+				}
+			]
 		},
 		"strings": {
 			"patterns": [
@@ -49,6 +62,27 @@
 		"string-escape-character": {
 			"name": "constant.character.escape.jink",
 			"match": "\\\\.",
+			"patterns": []
+		},
+		"comments": {
+			"patterns": [
+				{
+					"include": "#comment-line"
+				},
+				{
+					"include": "#comment-block"
+				}
+			]
+		},
+		"comment-line": {
+			"name": "comment.line.double-slash.jink",
+			"match": "//.*",
+			"patterns": []
+		},
+		"comment-block": {
+			"name": "comment.block.jink",
+			"begin": "\\/\\*",
+			"end": "\\*\\/",
 			"patterns": []
 		}
 	},
