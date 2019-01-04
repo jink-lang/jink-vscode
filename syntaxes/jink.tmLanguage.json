@@ -12,8 +12,16 @@
 			"include": "#comments"
 		},
 		{
-			"name": "constant.numeric",
+			"name": "constant.numeric.jink",
 			"match": "[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
+		},
+		{
+			"name": "entity.name.type",
+			"match": "\\b(int|float|string|bool|obj)\\b"
+		},
+		{
+			"name": "entity.name.function",
+			"match": "[^\\d(.][\\w$_]+\\h*(?=\\()"
 		}
 	],
 	"repository": {
@@ -21,11 +29,11 @@
 			"patterns": [
 				{
 					"name": "keyword.control.jink",
-					"match": "\\b(if|else|elseif|import|export|void|return|delete|true|false|null|int|float|string|bool)\\b"
+					"match": "\\b(if|else|elseif|import|void|return|delete|true|false|null|fun|let|const)\\b"
 				},
 				{
 					"name": "keyword.operator",
-					"match": "\\+|\\?|\\||\\^|-|&|<|>|=|:"
+					"match": "(?<!/)/{1}(?!/)|\\+|\\*|\\?|\\||\\^|-|&|<|>|=|:"
 				}
 			]
 		},
