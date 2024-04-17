@@ -1,15 +1,16 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Jink",
+	"scopeName": "text.jink",
 	"patterns": [
+		{
+			"include": "#comments"
+		},
 		{
 			"include": "#keywords"
 		},
 		{
 			"include": "#strings"
-		},
-		{
-			"include": "#comments"
 		},
 		{
 			"name": "constant.numeric.jink",
@@ -75,24 +76,22 @@
 		"comments": {
 			"patterns": [
 				{
-					"include": "#comment-line"
+					"include": "#comment-block"
 				},
 				{
-					"include": "#comment-block"
+					"include": "#comment-line"
 				}
 			]
 		},
 		"comment-line": {
 			"name": "comment.line.double-slash.jink",
-			"match": "//.*",
-			"patterns": []
+			"match": "//.*"
 		},
 		"comment-block": {
 			"name": "comment.block.jink",
-			"begin": "\\/\\*",
-			"end": "\\*\\/",
+			"begin": "/\\*",
+			"end": "\\*/",
 			"patterns": []
 		}
-	},
-	"scopeName": "text.jink"
+	}
 }
