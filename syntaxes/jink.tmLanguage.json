@@ -18,7 +18,7 @@
 		},
 		{
 			"name": "entity.name.type",
-			"match": "\\b(int|float|string|bool|obj)\\b"
+			"match": "(?:\\b(int|float|string|bool|obj)|\\b\\w+\\s\\b(?=\\w+ ?=)\\b)"
 		},
 		{
 			"name": "entity.name.function",
@@ -30,11 +30,11 @@
 			"patterns": [
 				{
 					"name": "keyword.control.jink",
-					"match": "\\b(if|else|elseif|import|void|return|delete|true|false|null|fun|let|const)\\b"
+					"match": "\\b(if|else|elseif|void|return|del|true|false|null|fun|let|const|type|cls|self|pub|import|from|as|while|for)\\b"
 				},
 				{
 					"name": "keyword.operator",
-					"match": "(?<!/)/{1}(?!/)|\\+|\\*|\\?|\\||\\^|-|&|<|>|=|:"
+					"match": "(?<!/)/{1}(?!/)|\\+|\\*|\\?|\\||\\^|-|&|<|>|=|:|!|!="
 				}
 			]
 		},

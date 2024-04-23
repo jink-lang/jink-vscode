@@ -2,9 +2,13 @@
 
 All notable changes to the Jink VS Code extension will be documented in this file.
 
-## [0.0.4] - 2024-04-17
+## [0.0.5] - 2023-04-23
 ### Added
-- Fix syntax highlighting for block comments.
+- Updated keyword, type and operator syntax highlighting.
+
+## [0.0.4] - 2024-04-17
+### Fixed
+- Syntax highlighting for block comments.
 
 ## [0.0.3] - 2019-01-04
 ### Added
