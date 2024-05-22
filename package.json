@@ -27,8 +27,8 @@
                     ".jk"
                 ],
                 "icon": {
-                    "light": "./assets/icon.png",
-                    "dark": "./assets/icon.png"
+                    "light": "./assets/icon_light.png",
+                    "dark": "./assets/icon_dark.png"
                 },
                 "configuration": "./language-configuration.json"
             }
