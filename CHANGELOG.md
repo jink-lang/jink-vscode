@@ -2,6 +2,10 @@
 
 All notable changes to the Jink VS Code extension will be documented in this file.
 
+## [0.0.7] - 2024-05-22
+### Added
+- Added theme-supported icons.
+
 ## [0.0.6] - 2024-05-22
 ### Added
 - Added icons.
