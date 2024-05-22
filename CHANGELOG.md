@@ -2,7 +2,11 @@
 
 All notable changes to the Jink VS Code extension will be documented in this file.
 
-## [0.0.5] - 2023-04-23
+## [0.0.6] - 2024-05-22
+### Added
+- Added icons.
+
+## [0.0.5] - 2024-04-23
 ### Added
 - Updated keyword, type and operator syntax highlighting.
 
