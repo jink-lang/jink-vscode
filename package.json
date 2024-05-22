@@ -2,7 +2,7 @@
     "name": "jink",
     "displayName": "Jink",
     "description": "Jink language support for Visual Studio Code",
-    "icon": "images/icon.png",
+    "icon": "assets/icon.png",
     "version": "0.0.6",
     "publisher": "jink-lang",
     "repository": {
@@ -27,8 +27,8 @@
                     ".jk"
                 ],
                 "icon": {
-                    "light": "./images/icon.png",
-                    "dark": "./images/icon.png"
+                    "light": "./assets/icon.png",
+                    "dark": "./assets/icon.png"
                 },
                 "configuration": "./language-configuration.json"
             }
