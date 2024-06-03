@@ -2,6 +2,10 @@
 
 All notable changes to the Jink VS Code extension will be documented in this file.
 
+## [0.0.8] - 2024-06-03
+### Added
+- Added syntax highlighting for `break` and `continue` statements.
+
 ## [0.0.7] - 2024-05-22
 ### Added
 - Added theme-supported icons.

@@ -30,7 +30,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.jink",
-					"match": "\\b(if|else|elseif|void|return|del|true|false|null|fun|let|const|type|cls|self|pub|import|from|as|while|for)\\b"
+					"match": "\\b(if|else|elseif|void|return|del|true|false|null|fun|let|const|type|cls|self|pub|import|from|as|while|for|break|continue)\\b"
 				},
 				{
 					"name": "keyword.operator",
