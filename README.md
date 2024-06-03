@@ -19,6 +19,6 @@ Check [CHANGELOG.md](https://github.com/jink-lang/jink-vscode/blob/master/CHANGE
 
 This project is distributed under the MIT License - see the [license file](LICENSE) for details.
 
-Copyright © 2018-2024 Jacob, jink-lang contributors
+Copyright © 2018-2024 Jacob Noah, jink-lang contributors
 
 **Enjoy!**
