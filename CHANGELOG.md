@@ -2,6 +2,11 @@
 
 All notable changes to the Jink VS Code extension will be documented in this file.
 
+## [0.0.9] - 2024-06-03
+### Added
+- Added language server with support for auto-completion of defined variables, functions, classes and types.
+- Added snippets for printf extern and function, class, and type definition.
+
 ## [0.0.8] - 2024-06-03
 ### Added
 - Added syntax highlighting for `break` and `continue` statements.

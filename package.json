@@ -3,34 +3,36 @@
     "displayName": "Jink",
     "description": "Jink language support for Visual Studio Code",
     "icon": "assets/icon.png",
-    "version": "0.0.8",
+    "license": "MIT",
+    "version": "0.0.9",
+    "author": "jink-lang",
     "publisher": "jink-lang",
     "repository": {
         "type": "git",
         "url": "https://github.com/jink-lang/jink-vscode"
     },
     "engines": {
-        "vscode": "^1.22.0"
+        "vscode": "^1.75.0"
     },
     "categories": [
-        "Programming Languages"
+        "Programming Languages",
+        "Snippets"
     ],
+    "activationEvents": [
+      "onLanguage:jink"
+    ],
+	"main": "./client/out/client",
     "contributes": {
         "languages": [
             {
                 "id": "jink",
-                "aliases": [
-                    "Jink",
-                    "jink"
-                ],
-                "extensions": [
-                    ".jk"
-                ],
+                "aliases": ["Jink", "jink", "jk"],
+                "extensions": [".jk"],
+                "configuration": "./language-configuration.json",
                 "icon": {
                     "light": "./assets/icon_light.png",
                     "dark": "./assets/icon_dark.png"
-                },
-                "configuration": "./language-configuration.json"
+                }
             }
         ],
         "grammars": [
@@ -39,6 +41,47 @@
                 "scopeName": "text.jink",
                 "path": "./syntaxes/jink.tmLanguage.json"
             }
-        ]
-    }
+        ],
+        "snippets": [
+            {
+                "language": "jink",
+                "path": "./snippets/snippets.json"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Jink",
+            "properties": {
+                "jinkLanguageServer.maxNumberOfProblems":
+                {
+                    "scope": "resource",
+                    "type": "number",
+                    "default": 100,
+                    "description": "Controls the maximum number of problems produced by the Jink language server."
+                },
+                "jinkLanguageServer.trace.server": {
+                    "scope": "window",
+                    "type": "string",
+                    "enum": [
+                        "off",
+                        "messages",
+                        "verbose"
+                    ],
+                    "default": "off",
+                    "description": "Traces the communication between VSCode and the Jink language server."
+                }
+            }
+        }
+    },
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -b",
+		"watch": "tsc -b -w",
+        "update": "npm update && cd client && npm update && cd ../server && npm update && cd ..",
+		"postinstall": "cd client && npm install && cd ../server && npm install && cd .."
+	},
+	"devDependencies": {
+		"@types/node": "^18.14.6",
+		"typescript": "^5.3.3"
+	}
 }

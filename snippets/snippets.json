@@ -1,0 +1,36 @@
+{
+	"Print to console": {
+		"prefix": "print",
+		"body": [
+			"printf(\"$1\");$2"
+		],
+		"description": "Log output to console"
+	},
+  "Define a function": {
+    "prefix": "fun",
+    "body": [
+      "fun $1($2)$3 {",
+      "\t$4",
+      "}"
+    ],
+    "description": "Define a function"
+  },
+  "Define a class": {
+    "prefix": ["class", "cls"],
+    "body": [
+      "cls $1 = {",
+      "\t$2",
+      "}"
+    ],
+    "description": "Define a class"
+  },
+  "Define a type": {
+    "prefix": ["type", "struct"],
+    "body": [
+      "type $1 = {",
+      "\t$2",
+      "}"
+    ],
+    "description": "Define a type (struct)"
+  }
+}
