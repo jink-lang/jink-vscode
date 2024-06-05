@@ -4,7 +4,13 @@
 
 ## Features
 
-This extension adds support for the [Jink](https://github.com/jink-lang/jink) language! Right now it just includes syntax highlighting, but it will be updated with snippets and more features in the future as the language evolves.
+This extension adds support for the **[Jink](https://github.com/jink-lang/jink)** programming language!
+
+The extension provides:
+- Name resolution and auto-completion for defined variables, functions, classes and types.
+- Simple snippets for: `printf` extern, function, class, and type definition.
+- Syntax highlighting for keywords, types, operators, numbers, strings and comments.
+- Theme-supported icons.
 
 ## Release Notes
 
