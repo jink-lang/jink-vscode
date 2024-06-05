@@ -2,6 +2,10 @@
 
 All notable changes to the Jink VS Code extension will be documented in this file.
 
+## [0.1.0] - 2024-06-05
+### Fixed
+- Fixed dependencies and finalize initial LSP functionality.
+
 ## [0.0.9] - 2024-06-05
 ### Added
 - Added language server with support for auto-completion of defined variables, functions, classes and types.
