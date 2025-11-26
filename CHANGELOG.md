@@ -2,6 +2,19 @@
 
 All notable changes to the Jink VS Code extension will be documented in this file.
 
+## [0.2.0] - 2025-11-25
+### Added
+- Added Go-to-Definition support for variables, functions, classes, types, and enums.
+- Added Auto-Import completion suggestions.
+- Added workspace symbol scanning to find definitions and add Go-to-Def across modules.
+- Added `enum` validation and snippets.
+- Added import validation and unused warnings.
+- Improved variable definition/declaration support and added unused warnings and undefined errors.
+- Added additional snippets: `extern`, `import`, `if`, `while`, `for`.
+
+### Fixed
+- Corrected alphanumeric identifiers being mislabeled.
+
 ## [0.1.0] - 2024-06-05
 ### Fixed
 - Fixed dependencies and finalize initial LSP functionality.

@@ -1,97 +1,97 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "Jink",
-	"scopeName": "text.jink",
-	"patterns": [
-		{
-			"include": "#comments"
-		},
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		},
-		{
-			"name": "constant.numeric.jink",
-			"match": "[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)"
-		},
-		{
-			"name": "entity.name.type",
-			"match": "(?:\\b(int|float|string|bool|obj)|\\b\\w+\\s\\b(?=\\w+ ?=)\\b)"
-		},
-		{
-			"name": "entity.name.function",
-			"match": "[^\\d(.][\\w$_]+\\h*(?=\\()"
-		}
-	],
-	"repository": {
-		"keywords": {
-			"patterns": [
-				{
-					"name": "keyword.control.jink",
-					"match": "\\b(if|else|elseif|void|return|del|true|false|null|fun|let|const|type|cls|self|pub|import|from|as|while|for|break|continue)\\b"
-				},
-				{
-					"name": "keyword.operator",
-					"match": "(?<!/)/{1}(?!/)|\\+|\\*|\\?|\\||\\^|-|&|<|>|=|:|!|!="
-				}
-			]
-		},
-		"strings": {
-			"patterns": [
-				{
-					"include": "#string-double"
-				},
-				{
-					"include": "#string-single"
-				}
-			]
-		},
-		"string-double": {
-			"name": "string.quoted.double.jink",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"include": "#string-escape-character"
-				}
-			]
-		},
-		"string-single": {
-			"name": "string.quoted.single.jink",
-			"begin": "'",
-			"end": "'",
-			"patterns": [
-				{
-					"include": "#string-escape-character"
-				}
-			]
-		},
-		"string-escape-character": {
-			"name": "constant.character.escape.jink",
-			"match": "\\\\.",
-			"patterns": []
-		},
-		"comments": {
-			"patterns": [
-				{
-					"include": "#comment-block"
-				},
-				{
-					"include": "#comment-line"
-				}
-			]
-		},
-		"comment-line": {
-			"name": "comment.line.double-slash.jink",
-			"match": "//.*"
-		},
-		"comment-block": {
-			"name": "comment.block.jink",
-			"begin": "/\\*",
-			"end": "\\*/",
-			"patterns": []
-		}
-	}
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Jink",
+  "scopeName": "text.jink",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "name": "constant.numeric.jink",
+      "match": "\\b[0-9]+([.][0-9]*)?\\b|\\b[.][0-9]+\\b"
+    },
+    {
+      "name": "entity.name.type",
+      "match": "(?:\\b(int|float|string|bool|obj|ptr|void)|\\b\\w+\\s\\b(?=\\w+ ?=)\\b)"
+    },
+    {
+      "name": "entity.name.function",
+      "match": "[^\\d(.][\\w$_]+\\h*(?=\\()"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.jink",
+          "match": "\\b(if|else|elseif|void|return|del|true|false|null|fun|let|const|type|cls|self|pub|import|from|as|while|for|break|continue)\\b"
+        },
+        {
+          "name": "keyword.operator",
+          "match": "(?<!/)/{1}(?!/)|\\+|\\*|\\?|\\||\\^|-|&|<|>|=|:|!|!="
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "include": "#string-double"
+        },
+        {
+          "include": "#string-single"
+        }
+      ]
+    },
+    "string-double": {
+      "name": "string.quoted.double.jink",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "include": "#string-escape-character"
+        }
+      ]
+    },
+    "string-single": {
+      "name": "string.quoted.single.jink",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "include": "#string-escape-character"
+        }
+      ]
+    },
+    "string-escape-character": {
+      "name": "constant.character.escape.jink",
+      "match": "\\\\.",
+      "patterns": []
+    },
+    "comments": {
+      "patterns": [
+        {
+          "include": "#comment-block"
+        },
+        {
+          "include": "#comment-line"
+        }
+      ]
+    },
+    "comment-line": {
+      "name": "comment.line.double-slash.jink",
+      "match": "//.*"
+    },
+    "comment-block": {
+      "name": "comment.block.jink",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "patterns": []
+    }
+  }
 }

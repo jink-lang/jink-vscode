@@ -32,5 +32,55 @@
       "}"
     ],
     "description": "Define a type (struct)"
+  },
+  "Define an enum": {
+    "prefix": "enum",
+    "body": [
+      "enum $1 = {",
+      "\t$2",
+      "}"
+    ],
+    "description": "Define an enum"
+  },
+  "Extern declaration": {
+    "prefix": "extern",
+    "body": [
+      "extern(\"$1\") $2($3);"
+    ],
+    "description": "Declare an external function"
+  },
+  "Import module": {
+    "prefix": "import",
+    "body": [
+      "import $1;"
+    ],
+    "description": "Import a module"
+  },
+  "If statement": {
+    "prefix": "if",
+    "body": [
+      "if ($1) {",
+      "\t$2",
+      "}"
+    ],
+    "description": "If statement"
+  },
+  "While loop": {
+    "prefix": "while",
+    "body": [
+      "while ($1) {",
+      "\t$2",
+      "}"
+    ],
+    "description": "While loop"
+  },
+  "For loop": {
+    "prefix": "for",
+    "body": [
+      "for ($1 in $2) {",
+      "\t$3",
+      "}"
+    ],
+    "description": "For loop"
   }
 }
