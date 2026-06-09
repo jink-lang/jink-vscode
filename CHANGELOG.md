@@ -2,6 +2,15 @@
 
 All notable changes to the Jink VS Code extension will be documented in this file.
 
+## [0.2.1] - 2026-06-08
+### Added
+- Added the `__ptr_read_ptr`, `__ptr_write_ptr`, `__ptr_read_f32`, `__ptr_write_f32`, `__ptr_read_byte`, and `__ptr_write_byte` pointer builtins.
+
+### Changed
+- Upgraded the language client and server to the LSP v10 libraries; minimum supported VS Code is now 1.91.
+- Bundled the client and server with esbuild, shrinking the packaged extension and speeding up activation.
+- Upgraded TypeScript to 6.0 and refreshed dev tooling, type definitions, and the build/watch configuration.
+
 ## [0.2.0] - 2025-11-25
 ### Added
 - Added Go-to-Definition support for variables, functions, classes, types, and enums.

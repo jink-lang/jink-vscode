@@ -7,6 +7,8 @@ export const keywords = [
 export const builtins = [
   "void", "true", "false", "null", "self", "int", "float", "string", "bool", "ptr", "obj",
   "__ptr_write_int", "__ptr_read_int", "__ptr_write_string", "__ptr_read_string",
+  "__ptr_write_ptr", "__ptr_read_ptr", "__ptr_write_f32", "__ptr_read_f32",
+  "__ptr_write_byte", "__ptr_read_byte",
 ];
 
 export const declarationKeywords = [
