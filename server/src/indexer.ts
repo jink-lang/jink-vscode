@@ -36,8 +36,10 @@ export class Indexer {
     const constPatternTyped = /^(pub\s+)?const\s+(?:[a-zA-Z_][a-zA-Z0-9_]*)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=/;
     const typeAliasPattern = /^(pub\s+)?type\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=/;
     const typeStructStartPattern = /^(pub\s+)?type\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*\{/;
-    const functionPattern = /^(pub\s+)?fun\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\((.*)\)/;
-    const externPattern = /^(pub\s+)?extern\s*\("[^"]*"\)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\((.*)\)/;
+    // Signatures may span multiple lines, so these only match the opening of the parameter list
+    // The full list is collected with collectParenList below
+    const functionStart = /^(pub\s+)?fun\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/;
+    const externStart = /^(pub\s+)?extern\s*\("[^"]*"\)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/;
     const classPattern = /^(pub\s+)?cls\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*(?:\(.*\))?\s*=/;
     const varPatternGlobal = /([a-zA-Z_][a-zA-Z0-9_]*)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*(?:;|=)/g;
 
@@ -218,43 +220,26 @@ export class Indexer {
           newSymbols.push({ name, kind: SymbolKind.Class, uri, range: Range.create(i, startChar, i, startChar + name.length), isPublic: !!match[1] });
         }
         continue;
-      } else if ((match = line.match(functionPattern))) {
+      } else if ((match = line.match(functionStart)) || (match = line.match(externStart))) {
+        // Function / extern decl. The param list may span multiple lines and individual params may have function types
+        // such as fun(int) -> int cb, so collect the whole parenthesized list and split it on top-level commas rather than single-line parsing
         const isPublic = !!match[1];
         const name = match[2];
-        const argsStr = match[3];
+        const rawLine = lines[i];
+        const nameIdx = rawLine.indexOf(name);
+        const openCol = rawLine.indexOf('(', nameIdx + name.length);
+        const { inner, endLine } = collectParenList(lines, i, openCol);
         const parameters: { name: string, type: string }[] = [];
-        if (argsStr.trim()) {
-          const args = argsStr.split(',');
-          for (const arg of args) {
-            const parts = arg.trim().split(/\s+/);
-            if (parts.length >= 2) {
-              parameters.push({ name: parts[1], type: parts[0] });
-            }
+        for (const part of splitTopLevelCommas(inner)) {
+          const param = parseParam(part);
+          if (param) {
+            parameters.push(param);
           }
         }
-        const startChar = line.indexOf(name);
-        if (startChar !== -1) {
-          newSymbols.push({ name, kind: SymbolKind.Function, uri, range: Range.create(i, startChar, i, startChar + name.length), isPublic, parameters });
+        if (nameIdx !== -1) {
+          newSymbols.push({ name, kind: SymbolKind.Function, uri, range: Range.create(i, nameIdx, i, nameIdx + name.length), isPublic, parameters });
         }
-        continue;
-      } else if ((match = line.match(externPattern))) {
-        const isPublic = !!match[1];
-        const name = match[2];
-        const argsStr = match[3];
-        const parameters: { name: string, type: string }[] = [];
-        if (argsStr.trim()) {
-          const args = argsStr.split(',');
-          for (const arg of args) {
-            const parts = arg.trim().split(/\s+/);
-            if (parts.length >= 2) {
-              parameters.push({ name: parts[1], type: parts[0] });
-            }
-          }
-        }
-        const startChar = line.indexOf(name);
-        if (startChar !== -1) {
-          newSymbols.push({ name, kind: SymbolKind.Function, uri, range: Range.create(i, startChar, i, startChar + name.length), isPublic, parameters });
-        }
+        i = endLine; // Skip any consumed continuation lines
         continue;
       } else if ((match = line.match(classPattern))) {
         const name = match[2];
@@ -341,4 +326,58 @@ export class Indexer {
   public getSymbolsInUri(uri: string): JinkSymbol[] {
     return this.symbolsByUri.get(uri) || [];
   }
+}
+
+// Collect a parenthesized list that may span multiple lines, starting from the
+// '(' at openCol on startLine - returns the inner text (newlines collapsed to spaces)
+// and the index of the line holding the matching ')'
+function collectParenList(lines: string[], startLine: number, openCol: number): { inner: string, endLine: number } {
+  let depth = 0;
+  let inner = '';
+  for (let li = startLine; li < lines.length; li++) {
+    const ln = lines[li];
+    const from = li === startLine ? openCol : 0;
+    for (let c = from; c < ln.length; c++) {
+      const ch = ln[c];
+      if (ch === '(') {
+        depth++;
+        if (depth === 1) continue; // Skip the outer opening paren
+      } else if (ch === ')') {
+        depth--;
+        if (depth === 0) return { inner, endLine: li };
+      }
+      if (depth >= 1) inner += ch;
+    }
+    inner += ' ';
+  }
+  return { inner, endLine: lines.length - 1 };
+}
+
+// Split a param list on top-level commas, ignoring commas nested in
+// parentheses/brackets/braces (like inside a fun(int, int) -> int param type)
+function splitTopLevelCommas(s: string): string[] {
+  const parts: string[] = [];
+  let depth = 0;
+  let cur = '';
+  for (const ch of s) {
+    if (ch === '(' || ch === '[' || ch === '{') depth++;
+    else if (ch === ')' || ch === ']' || ch === '}') depth--;
+    if (ch === ',' && depth === 0) {
+      parts.push(cur);
+      cur = '';
+    } else {
+      cur += ch;
+    }
+  }
+  if (cur.trim()) parts.push(cur);
+  return parts;
+}
+
+function parseParam(p: string): { name: string, type: string } | null {
+  const ids = p.match(/[a-zA-Z_][a-zA-Z0-9_]*/g);
+  if (!ids || ids.length === 0) return null;
+  const name = ids[ids.length - 1];
+  const trimmed = p.trim();
+  const type = trimmed.slice(0, trimmed.lastIndexOf(name)).trim() || trimmed;
+  return { name, type };
 }

@@ -22,18 +22,12 @@ The extension provides:
 
 ## Latest Release Notes
 
-### [0.2.0] - 2025-11-25
+### [0.3.0] - 2026-06-11
 ### Added
-- Added Go-to-Definition support for variables, functions, classes, types, and enums.
-- Added Auto-Import completion suggestions.
-- Added workspace symbol scanning to find definitions across all modules.
-- Added `enum` validation and snippets.
-- Added import validation and unused warnings.
-- Improved variable definition/declaration support and added unused warnings and undefined errors.
-- Added additional snippets: `extern`, `import`, `if`, `while`, `for`.
+- Added support for first-class functions - function-type parameters such as `fun(int) -> int cb` are now parsed correctly, and the parameters of such functions are recognized in the function body instead of being reported as undefined.
 
 ### Fixed
-- Corrected alphanumeric identifiers being mislabeled.
+- Indexed functions and externs whose signatures span multiple lines. Previously their exports were never recorded so they reported as undefined everywhere they got imported.
 
 ## License
 

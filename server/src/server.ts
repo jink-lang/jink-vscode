@@ -625,7 +625,10 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
     }
 
     if (isArrow) {
-      stateStack.push(State.RETURN_TYPE);
+      // A -> inside a parameter list belongs to a function-type parameter such as fun(int) -> int cb
+      if (currentState !== State.FUN_ARGS) {
+        stateStack.push(State.RETURN_TYPE);
+      }
       lastToken = '->';
       lastTokenWasKeyword = false;
       continue;

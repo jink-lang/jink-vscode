@@ -2,6 +2,13 @@
 
 All notable changes to the Jink VS Code extension will be documented in this file.
 
+## [0.3.0] - 2026-06-11
+### Added
+- Added support for first-class functions - function-type parameters such as `fun(int) -> int cb` are now parsed correctly, and the parameters of such functions are recognized in the function body instead of being reported as undefined.
+
+### Fixed
+- Indexed functions and externs whose signatures span multiple lines. Previously their exports were never recorded so they reported as undefined everywhere they got imported.
+
 ## [0.2.1] - 2026-06-08
 ### Added
 - Added the `__ptr_read_ptr`, `__ptr_write_ptr`, `__ptr_read_f32`, `__ptr_write_f32`, `__ptr_read_byte`, and `__ptr_write_byte` pointer builtins.
