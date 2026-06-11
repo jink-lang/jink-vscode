@@ -28,6 +28,7 @@ The extension provides:
 
 ### Fixed
 - Indexed functions and externs whose signatures span multiple lines. Previously their exports were never recorded so they reported as undefined everywhere they got imported.
+- Added Go-to-Definition for function-type parameters - a reference such as `cb(x)` now jumps to the parameter's declaration in the enclosing function signature.
 
 ## License
 

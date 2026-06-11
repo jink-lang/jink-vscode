@@ -1153,6 +1153,31 @@ connection.onDefinition((params: DefinitionParams): Location[] => {
       return [Location.create(document.uri, matchingImport.range)];
     }
 
+    // 5. Function-type parameter (such as fun(int) -> int cb) - a reference such as
+    // cb(x) in the body should jump to the param's declaration
+    // Params are file-local, so resolve against the enclosing function's signature
+    const funcSymbols = localSymbols.filter(s => s.kind === SymbolKind.Function && !!s.parameters && s.parameters.length > 0);
+    const enclosing = funcSymbols
+      .filter(f => f.range.start.line <= position.line)
+      .sort((a, b) => b.range.start.line - a.range.start.line)[0];
+    if (enclosing && enclosing.parameters) {
+      const param = enclosing.parameters.find(p => p.name === word && /^fun\b/.test(p.type.trim()));
+      if (param) {
+        const wordRe = new RegExp(`\\b${word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'g');
+        for (let ln = enclosing.range.start.line; ln < lines.length; ln++) {
+          const l = lines[ln];
+          let m: RegExpExecArray | null;
+          while ((m = wordRe.exec(l)) !== null) {
+            // Skip the function name itself on the declaration line
+            if (ln === enclosing.range.start.line && m.index <= enclosing.range.start.character) continue;
+            return [Location.create(document.uri, { start: { line: ln, character: m.index }, end: { line: ln, character: m.index + word.length } })];
+          }
+          wordRe.lastIndex = 0;
+          if (l.includes('{')) break; // Stop at the function body
+        }
+      }
+    }
+
     return [];
   }
 

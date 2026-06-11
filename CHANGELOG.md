@@ -2,6 +2,10 @@
 
 All notable changes to the Jink VS Code extension will be documented in this file.
 
+## [0.3.1] - 2026-06-11
+### Added
+- Added Go-to-Definition for function-type parameters - a reference such as `cb(x)` now jumps to the parameter's declaration in the enclosing function signature.
+
 ## [0.3.0] - 2026-06-11
 ### Added
 - Added support for first-class functions - function-type parameters such as `fun(int) -> int cb` are now parsed correctly, and the parameters of such functions are recognized in the function body instead of being reported as undefined.
